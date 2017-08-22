@@ -28,10 +28,14 @@ class EcoTouchReader {
 		}
 	}
 	
-	public function readAllTags($tags = array()) {
+	public function readTags($tags = array()) {
 		$refl = new ReflectionClass('EcoTouchTags');
 		$ecotags = $refl->getConstants();
 		$t=1;
+		if (count($tags) == 0) {
+			throw new Exception('No EcoTouch tags to be read specified.');
+			return false;
+		}
 		foreach ($tags as $k => $tag) {
 			if ($this->isValidTag($k)) {
 				$parms .= "&t" . $t . "=" . $ecotags[$k]['tagName'];
