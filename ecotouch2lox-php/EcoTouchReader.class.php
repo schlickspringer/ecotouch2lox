@@ -28,13 +28,15 @@ class EcoTouchReader {
 		}
 	}
 	
-	public function readAllTags() {
+	public function readAllTags($tags = array()) {
 		$refl = new ReflectionClass('EcoTouchTags');
-		$tags = $refl->getConstants();
+		$ecotags = $refl->getConstants();
 		$t=1;
-		foreach ($tags as $tag => $desc) {
-			$parms .= "&t" . $t . "=" . $tag;
-			$t++;
+		foreach ($tags as $k => $tag) {
+			if ($this->isValidTag($k)) {
+				$parms .= "&t" . $t . "=" . $ecotags[$k]['tagName'];
+				$t++;
+			}
 		}
 		$n = count($tags);
 		$ch = curl_init('http://' . WK_IP . '/cgi/readTags?n=' . $n . $parms);
@@ -62,12 +64,12 @@ class EcoTouchReader {
 		foreach ($lines as $line) {
 			$line = "#" . $line;
 			if (preg_match("/#(.+)\\s+S_OK[^0-9-]+([0-9-]+)\\s+([0-9-]+)/", $line, $match)) {
-				foreach ($tags as $tag => $desc) {
-					if ($tag == $match[1]) {
+				foreach ($ecotags as $tag => $desc) {
+					if ($desc['tagName'] == $match[1]) {
 						$this->tags[$i] = new \stdClass();
-						$this->tags[$i]->tag = $tag;
+						$this->tags[$i]->tagName = $desc['tagName'];
 						$this->tags[$i]->name = $desc['name'];
-						if ($desc['class'] == 'number') {
+						if ($desc['class'] == 'number' && !$desc['divisor']) {
 							$this->tags[$i]->value = $match[3]/10;
 						} else {
 							$this->tags[$i]->value = $match[3];
@@ -80,35 +82,29 @@ class EcoTouchReader {
 		return true;		
 	}
 	
-	public function getTagById($tag) {
-		if ($this->_tags == null) $this->readAllTags();
+	private function isValidTag($tag) {
 		$refl = new ReflectionClass('EcoTouchTags');
 		$ecotags = $refl->getConstants();
 		if (array_key_exists($tag, $ecotags)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function getTagByName($tag) {
+		if ($this->isValidTag($tag)) {
 			foreach ($this->tags as $t) {
-				if ($t->tag == $tag) return $t;
+				if (strtolower($t->name) == strtolower($tag)) return $t;
 			}
 			throw new Exception('Tag not found: ' . $tag);
 			return false;
 		} else {
 			throw new Exception('Incorrect tag specified: ' . $tag);
+			return false;
 		}
 	}
 	
-	public function getTagByName($tag_name) {
-		if ($this->_tags == null) $this->readAllTags();
-		$refl = new ReflectionClass('EcoTouchTags');
-		$ecotags = $refl->getConstants();
-		foreach ($ecotags as $et) {
-			if ($et['name'] == $tag_name) {
-				foreach ($this->tags as $t) {
-					if ($t->name == $et['name']) return $t;
-				}
-			}
-		}
-		throw new Exception('Tag not found: ' . $tag_name);
-		return false;
-	}
 }
 
 ?>
