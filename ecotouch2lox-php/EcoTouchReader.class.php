@@ -3,14 +3,10 @@
 class EcoTouchReader {
 	
 	private $IDALToken = null;
-	private $tags = null;
+	public $tags = null;
 	
 	public function __construct() {
-		if (file_exists(WK_SESSION_FILE)) {
-			$this->IDALToken = unserialize(file_get_contents(WK_SESSION_FILE));
-		} else {
-			$this->getToken();
-		}
+		$this->getToken();
 	}
 	
 	private function getToken() {
@@ -20,7 +16,6 @@ class EcoTouchReader {
 		curl_close($ch);
 		if (preg_match("/[a-f0-9]{32}/", $response, $match)) {
 			$this->IDALToken = $match[0];
-			file_put_contents(WK_SESSION_FILE, serialize($this->IDALToken));
 			return true;
 		} else {
 			throw new Exception('unable to connect to heat pump: ' . $response);
@@ -28,22 +23,17 @@ class EcoTouchReader {
 		}
 	}
 	
-	public function readTags($tags = array()) {
+	public function readAllTags() {
 		$refl = new ReflectionClass('EcoTouchTags');
 		$ecotags = $refl->getConstants();
 		$t=1;
-		if (count($tags) == 0) {
-			throw new Exception('No EcoTouch tags to be read specified.');
-			return false;
-		}
-		foreach ($tags as $k => $tag) {
-			if ($this->isValidTag($k)) {
-				$parms .= "&t" . $t . "=" . $ecotags[$k]['tagName'];
+		foreach ($ecotags as $k => $tag) {
+			if ($tag['class'] == 'number') {
+				$parms .= "&t" . $t . "=" . $tag['tagName'];
 				$t++;
 			}
 		}
-		$n = count($tags);
-		$ch = curl_init('http://' . WK_IP . '/cgi/readTags?n=' . $n . $parms);
+		$ch = curl_init('http://' . WK_IP . '/cgi/readTags?n=' . $t . $parms);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_COOKIE, 'IDALToken='. $this->IDALToken);
 		$response = curl_exec($ch);
@@ -53,7 +43,7 @@ class EcoTouchReader {
 			return false;
 		} elseif (preg_match("/E_NEED_LOGIN/", $response)) {
 			if ($this->getToken()) {
-				$ch = curl_init('http://' . WK_IP . '/cgi/readTags?n=' . $n . $parms);
+				$ch = curl_init('http://' . WK_IP . '/cgi/readTags?n=' . $t . $parms);
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt($ch, CURLOPT_COOKIE, 'IDALToken='. $this->IDALToken);
 				$response = curl_exec($ch);
@@ -85,30 +75,7 @@ class EcoTouchReader {
 		}
 		return true;		
 	}
-	
-	private function isValidTag($tag) {
-		$refl = new ReflectionClass('EcoTouchTags');
-		$ecotags = $refl->getConstants();
-		if (array_key_exists($tag, $ecotags)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public function getTagByName($tag) {
-		if ($this->isValidTag($tag)) {
-			foreach ($this->tags as $t) {
-				if (strtolower($t->name) == strtolower($tag)) return $t;
-			}
-			throw new Exception('Tag not found: ' . $tag);
-			return false;
-		} else {
-			throw new Exception('Incorrect tag specified: ' . $tag);
-			return false;
-		}
-	}
-	
+		
 }
 
 ?>
