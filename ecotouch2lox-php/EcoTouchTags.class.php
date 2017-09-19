@@ -98,7 +98,7 @@ abstract class EcoTouchTags {
 	// Sollwertvorgabe Kühlbetrieb
 	const TEMPERATURE_COOLING_SET2 = array('tagName' => 'A35', 'name' => "temperature_cooling_set2", 'class' => 'number');
 	
-	// Sollwert Warmwassertemperatur
+	// Geforderte Warmwassertemperatur
 	const TEMPERATURE_WATER_SET = array('tagName' => 'A37', 'name' => "temperature_water_set", 'class' => 'number');
 	
 	// Sollwertvorgabe Warmwassertemperatur
@@ -203,12 +203,24 @@ abstract class EcoTouchTags {
 	// Betriebsstunden Solarkreis
 	const OPERATING_HOURS_SOLAR = array('tagName' => 'I22', 'name' => "operating_hours_solar", 'class' => 'number', 'type' => 'word');
 
+	// Betriebsmodus Heizung
+	// 0: Aus, 1: Auto, 2: Manuell
+	const HEATING_MODE = array('tagName' => 'I30', 'name' => "heating_mode", 'class' => 'number', 'divisor' => false);
+	
 	// Handabschaltung Heizbetrieb
 	const ENABLE_HEATING = array('tagName' => 'I30', 'name' => "enable_heating", 'class' => 'switch', 'type' => 'word');
+
+	// Betriebsmodus Kühlen
+	// 0: Aus, 1: Auto, 2: Manuell
+	const COOLING_MODE = array('tagName' => 'I31', 'name' => "cooling_mode", 'class' => 'number', 'divisor' => false);
 	
 	// Handabschaltung Kühlbetrieb
 	const ENABLE_COOLING = array('tagName' => 'I31', 'name' => "enable_cooling", 'class' => 'switch', 'type' => 'word');
 
+	// Betriebsmodus Warmwasser
+	// 0: Aus, 1: Auto, 2: Manuell
+	const WARMWATER_MODE = array('tagName' => 'I32', 'name' => "warmwater_mode", 'class' => 'number', 'divisor' => false);
+	
 	// Handabschaltung Warmwasserbetrieb
 	const ENABLE_WARMWATER = array('tagName' => 'I32', 'name' => "enable_warmwater", 'class' => 'switch', 'type' => 'word');
 

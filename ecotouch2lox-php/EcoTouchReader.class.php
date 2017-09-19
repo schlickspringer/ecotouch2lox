@@ -59,14 +59,14 @@ class EcoTouchReader {
 			$line = "#" . $line;
 			if (preg_match("/#(.+)\\s+S_OK[^0-9-]+([0-9-]+)\\s+([0-9-]+)/", $line, $match)) {
 				foreach ($ecotags as $tag => $desc) {
-					if ($desc['tagName'] == $match[1]) {
+					if ($desc['tagName'] == $match[1] && $desc['class'] == 'number') {
 						$this->tags[$i] = new \stdClass();
 						$this->tags[$i]->tagName = $desc['tagName'];
 						$this->tags[$i]->name = $desc['name'];
-						if ($desc['class'] == 'number' && !$desc['divisor']) {
-							$this->tags[$i]->value = $match[3]/10;
+						if ($desc['class'] == 'number' && !isset($desc['divisor'])) {
+							$this->tags[$i]->value = intval($match[3])/10;
 						} else {
-							$this->tags[$i]->value = $match[3];
+							$this->tags[$i]->value = intval($match[3]);
 						}
 					}
 				}
