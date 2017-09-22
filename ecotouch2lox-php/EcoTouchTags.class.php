@@ -87,7 +87,10 @@ abstract class EcoTouchTags {
 	const TEMPERATURE_HEATING_SET = array('tagName' => 'A31', 'name' => "temperature_heating_set", 'class' => 'number');
 	
 	// Sollwertvorgabe Heizkreistemperatur
-	const TEMPERATURE_HEATING_SET2 = array('tagName' => 'A32', 'name' => "temperature_heating_set2", 'class' => 'number');
+	const TEMPERATURE_HEATING_SET2 = array('tagName' => 'A32', 'name' => "temperature_heating_set2", 'class' => 'number', 'divisor' => 10);
+
+	// Sollwertvorgabe Heizkreistemperatur
+	const TEMPERATURE_HEATING_SET3 = array('tagName' => 'A32', 'name' => "temperature_heating_set2", 'class' => 'switch', 'divisor' => 10);
 	
 	// Aktuelle Kühlkreistemperatur
 	const TEMPERATURE_COOLING_RETURN = array('tagName' => 'A33', 'name' => "temperature_cooling_return", 'class' => 'number');
@@ -150,10 +153,10 @@ abstract class EcoTouchTags {
 	const COOLENABLETEMP = array('tagName' => 'A108', 'name' => "coolEnableTemp", 'class' => 'number');
 	
 	// Heizkurve - nviSollKuehlen
-	const NVISOLLKUEHLEN = array('name' => "nviSollKuehlen", 'class' => 'number');
+	const NVISOLLKUEHLEN = array('tagName' => "nviSollKuehlen", 'class' => 'number');
 	
 	// Temperaturveränderung Heizkreis bei PV-Ertrag
-	const TEMPCHANGE_HEATING_PV = array('name' => "tempchange_heating_pv", 'class' => 'number');
+	const TEMPCHANGE_HEATING_PV = array('tagName' => "tempchange_heating_pv", 'class' => 'number');
 	
 	// Temperaturveränderung Kühlkreis bei PV-Ertrag
 	const TEMPCHANGE_COOLING_PV = array('tagName' => 'A683', 'name' => "tempchange_cooling_pv", 'class' => 'number');
@@ -296,6 +299,10 @@ abstract class EcoTouchTags {
 	// Temperaturanpassung für die Heizung	
 	// value range 0..8 => -2K .. +2K
 	const ADAPT_HEATING = array('tagName' => 'I263', 'name' => "adapt_heating", 'class' => 'number', 'type' => 'word');
+
+	// Heizungsregelung
+	// 0: Witterungsgeführt, 1: Sollwertvorgabe, 2: Sollwertvorgabe BMS, 3: Sollwertvorgabe EXT, 4: Sollwertvorgabe 0-10V
+	const HEATING_CONTROL = array('tagName' => 'I265', 'name' => "heating_control", 'class' => 'number', 'type' => 'word', 'divisor' => false);
 	
 	// Handschaltung Heizungspumpe (H-0-A)
 	// H:Handschaltung Ein 0:Aus A:Automatik
