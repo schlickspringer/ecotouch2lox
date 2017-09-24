@@ -6,7 +6,7 @@ include("config.php");
 
 try {
 	$ecotouch = new EcoTouchReader();
-	if ($_GET['writeTag'] == 1) {
+	if (isset($_GET['writeTag'])) {
 		if ($return = $ecotouch->writeTag($_GET['t1'], $_GET['v1'])) {
 			echo $return;
 		} else {

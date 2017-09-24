@@ -143,11 +143,20 @@ abstract class EcoTouchTags {
 	// Heizkurve - nviTHeizgrenze
 	const NVITHEIZGRENZESOLL = array('tagName' => 'A94', 'name' => "nviTHeizgrenzeSoll", 'class' => 'number');
 	
-	// undokumentiert: Heizkurve max. VL-Temp (??)
-	const MAXVLTEMP = array('tagName' => 'A95', 'name' => "maxVLTemp", 'class' => 'number');
+	// Grenze für Vorlaufsolltemperatur (max.)
+	const MAXVLTEMP = array('tagName' => 'A95', 'name' => "maxVLTemp", 'class' => 'number', 'divisor' => 10);
+
+	// Grenze für Vorlaufsolltemperatur (max.)
+	const MAXVLTEMP_SET = array('tagName' => 'A95', 'name' => "maxVLTemp_set", 'class' => 'switch', 'divisor' => 10);
 	
 	// undokumentiert: Heizkreis Soll-Temp bei 0° Aussen
 	const TEMPSET0DEG = array('tagName' => 'A97', 'name' => "tempSet0Deg", 'class' => 'number');
+
+	// Grenze für Vorlaufsolltemperatur (min.)
+	const MINVLTEMP = array('tagName' => 'A104', 'name' => "minVLTemp", 'class' => 'number', 'divisor' => 10);
+
+	// Grenze für Vorlaufsolltemperatur (min.)
+	const MINVLTEMP_SET = array('tagName' => 'A104', 'name' => "minVLTemp_set", 'class' => 'switch', 'divisor' => 10);
 	
 	// undokumentiert: Kühlen Einschalt-Temp. Aussentemp (??)
 	const COOLENABLETEMP = array('tagName' => 'A108', 'name' => "coolEnableTemp", 'class' => 'number');
@@ -166,6 +175,9 @@ abstract class EcoTouchTags {
 	
 	// Temperaturveränderung Pool bei PV-Ertrag
 	const TEMPCHANGE_POOL_PV = array('tagName' => 'A685', 'name' => "tempchange_pool_pv", 'class' => 'number');
+	
+	// Frostschutztemperatur
+	const ANTIFREEZETEMP = array('tagName' => 'A1231', 'name' => "antifreeze_temp", 'class' => 'number');
 	
 	// undokumentiert: Firmware-Version Regler
 	const VERSION_CONTROLLER = array('tagName' => 'I1', 'name' => "version_controller", 'class' => 'number', 'type' => 'word');

@@ -62,7 +62,8 @@ class EcoTouchReader {
 	public function readAllTags() {
 		$refl = new ReflectionClass('EcoTouchTags');
 		$ecotags = $refl->getConstants();
-		$t=1;
+		$t = 1;
+		$parms = '';
 		foreach ($ecotags as $k => $tag) {
 			if ($tag['class'] == 'number') {
 				$parms .= "&t" . $t . "=" . $tag['tagName'];
