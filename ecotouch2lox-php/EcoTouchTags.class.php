@@ -321,6 +321,8 @@ abstract class EcoTouchTags {
 	// Kodierung: 0:? 1:? 2:Automatik
 	const MANUAL_HEATINGPUMP = array('tagName' => 'I1270', 'name' => "manual_heatingpump", 'class' => 'number', 'type' => 'word');
 	
+	const MANUAL_HEATINGPUMP_SET = array('tagName' => 'I1270', 'name' => "manual_heatingpump_set",  'class' => 'switch', 'divisor' => 10);
+	
 	// Handschaltung Quellenpumpe (H-0-A)
 	const MANUAL_SOURCEPUMP = array('tagName' => 'I1281', 'name' => "manual_sourcepump", 'class' => 'number', 'type' => 'word');
 
