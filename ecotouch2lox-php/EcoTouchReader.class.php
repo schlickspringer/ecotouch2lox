@@ -38,7 +38,7 @@ class EcoTouchReader {
 		$tagFound = false;
 		foreach ($ecotags as $tag => $desc) {
 			if ($desc['tagName'] == $tagName && $desc['class'] == 'switch') {
-				$tagValue *= $desc['divisor'];
+				if ($desc['divisor'] > 0) $tagValue *= $desc['divisor'];
 				$tagFound = true;
 			}
 		}

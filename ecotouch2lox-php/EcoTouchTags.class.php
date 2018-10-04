@@ -90,7 +90,7 @@ abstract class EcoTouchTags {
 	const TEMPERATURE_HEATING_SET2 = array('tagName' => 'A32', 'name' => "temperature_heating_set2", 'class' => 'number', 'divisor' => 10);
 
 	// Sollwertvorgabe Heizkreistemperatur
-	const TEMPERATURE_HEATING_SET3 = array('tagName' => 'A32', 'name' => "temperature_heating_set2", 'class' => 'switch', 'divisor' => 10);
+	const TEMPERATURE_HEATING_SET3 = array('tagName' => 'A32', 'name' => "temperature_heating_set3", 'class' => 'switch', 'divisor' => 10);
 	
 	// Aktuelle Kühlkreistemperatur
 	const TEMPERATURE_COOLING_RETURN = array('tagName' => 'A33', 'name' => "temperature_cooling_return", 'class' => 'number');
@@ -161,6 +161,9 @@ abstract class EcoTouchTags {
 	// undokumentiert: Kühlen Einschalt-Temp. Aussentemp (??)
 	const COOLENABLETEMP = array('tagName' => 'A108', 'name' => "coolEnableTemp", 'class' => 'number');
 	
+	// Sollwertvorgabe Kühlkreistemperatur
+	const TEMPERATURE_COOLING_SET3 = array('tagName' => 'A109', 'name' => "temperature_cooling_set3", 'class' => 'switch', 'divisor' => 10);
+	
 	// Heizkurve - nviSollKuehlen
 	const NVISOLLKUEHLEN = array('tagName' => "nviSollKuehlen", 'class' => 'number');
 	
@@ -223,14 +226,14 @@ abstract class EcoTouchTags {
 	const HEATING_MODE = array('tagName' => 'I30', 'name' => "heating_mode", 'class' => 'number', 'divisor' => false);
 	
 	// Handabschaltung Heizbetrieb
-	const ENABLE_HEATING = array('tagName' => 'I30', 'name' => "enable_heating", 'class' => 'switch', 'type' => 'word');
+	const ENABLE_HEATING = array('tagName' => 'I30', 'name' => "enable_heating", 'class' => 'switch', 'divisor' => false, 'type' => 'word');
 
 	// Betriebsmodus Kühlen
 	// 0: Aus, 1: Auto, 2: Manuell
 	const COOLING_MODE = array('tagName' => 'I31', 'name' => "cooling_mode", 'class' => 'number', 'divisor' => false);
 	
 	// Handabschaltung Kühlbetrieb
-	const ENABLE_COOLING = array('tagName' => 'I31', 'name' => "enable_cooling", 'class' => 'switch', 'type' => 'word');
+	const ENABLE_COOLING = array('tagName' => 'I31', 'n_ame' => "enable_cooling", 'class' => 'switch', 'type' => 'word');
 
 	// Betriebsmodus Warmwasser
 	// 0: Aus, 1: Auto, 2: Manuell
@@ -315,6 +318,10 @@ abstract class EcoTouchTags {
 	// Heizungsregelung
 	// 0: Witterungsgeführt, 1: Sollwertvorgabe, 2: Sollwertvorgabe BMS, 3: Sollwertvorgabe EXT, 4: Sollwertvorgabe 0-10V
 	const HEATING_CONTROL = array('tagName' => 'I265', 'name' => "heating_control", 'class' => 'number', 'type' => 'word', 'divisor' => false);
+
+	// Kühlregelung
+	// 0: Witterungsgeführt, 1: Sollwertvorgabe, 2: Sollwertvorgabe BMS, 3: Sollwertvorgabe EXT, 4: Sollwertvorgabe 0-10V
+	const COOLING_CONTROL = array('tagName' => 'I274', 'name' => "cooling_control", 'class' => 'number', 'type' => 'word', 'divisor' => false);
 	
 	// Handschaltung Heizungspumpe (H-0-A)
 	// H:Handschaltung Ein 0:Aus A:Automatik
