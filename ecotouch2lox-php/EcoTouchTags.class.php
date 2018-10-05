@@ -2,6 +2,10 @@
 
 abstract class EcoTouchTags {
 	
+	// I137 => heizung aktiv/nicht aktiv
+	// I138 => kühlung läuft/läuft nicht
+	// I139 => warmwasser aktiv/nicht aktiv
+	
 	// Aussentemperatur
 	const TEMPERATURE_OUTSIDE = array('tagName' => 'A1', 'name' => "temperature_outside", 'class' => 'number');
 	
@@ -311,6 +315,17 @@ abstract class EcoTouchTags {
 	// Serviceebene (0: normal, 1: service)
 	const STATE_SERVICE = array('tagName' => 'I135', 'name' => "state_service", 'class' => 'number', 'type' => 'word');
 
+	// Heizung (0: aus, 1: läuft)
+	const HEATING_RUNS = array('tagName' => 'I137', 'name' => "heating_runs", 'class' => 'number', 'type' => 'word');
+
+	// Kühlung (0: aus, 1: läuft)
+	const COOLING_RUNS = array('tagName' => 'I138', 'name' => "cooling_runs", 'class' => 'number', 'type' => 'word');
+	
+	// Warmwasser (0: aus, 1: läuft)
+	const WARMWATER_RUNS = array('tagName' => 'I139', 'name' => "warmwater_runs", 'class' => 'number', 'type' => 'word');
+	
+	
+	
 	// Temperaturanpassung für die Heizung	
 	// value range 0..8 => -2K .. +2K
 	const ADAPT_HEATING = array('tagName' => 'I263', 'name' => "adapt_heating", 'class' => 'number', 'type' => 'word');
