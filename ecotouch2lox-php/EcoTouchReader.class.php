@@ -100,7 +100,9 @@ class EcoTouchReader {
 						$this->tags[$i] = new \stdClass();
 						$this->tags[$i]->tagName = $desc['tagName'];
 						$this->tags[$i]->name = $desc['name'];
-						if ($desc['class'] == 'number' && !isset($desc['divisor'])) {
+						if ($desc['type'] == 'status') {
+							$this->tags[$i]->value = intval($match[3]);
+                        } elseif ($desc['class'] == 'number' && !isset($desc['divisor'])) {
 							$this->tags[$i]->value = intval($match[3])/10;
 						} elseif (is_numeric($desc['divisor'])) {
 							$this->tags[$i]->value = intval($match[3])/$desc['divisor'];

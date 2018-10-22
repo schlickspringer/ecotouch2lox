@@ -315,16 +315,14 @@ abstract class EcoTouchTags {
 	// Serviceebene (0: normal, 1: service)
 	const STATE_SERVICE = array('tagName' => 'I135', 'name' => "state_service", 'class' => 'number', 'type' => 'word');
 
-	// Heizung (0: aus, 1: läuft)
-	const HEATING_RUNS = array('tagName' => 'I137', 'name' => "heating_runs", 'class' => 'number', 'type' => 'word');
+	// Heizung (0: aus, 1: läuft, 2: inaktiv)
+	const HEATING_RUNS = array('tagName' => 'I137', 'name' => "heating_runs", 'class' => 'number', 'type' => 'status');
 
-	// Kühlung (0: aus, 1: läuft)
-	const COOLING_RUNS = array('tagName' => 'I138', 'name' => "cooling_runs", 'class' => 'number', 'type' => 'word');
+	// Kühlung (0: aus, 1: läuft, 2: inaktiv)
+	const COOLING_RUNS = array('tagName' => 'I138', 'name' => "cooling_runs", 'class' => 'number', 'type' => 'status');
 	
-	// Warmwasser (0: aus, 1: läuft)
-	const WARMWATER_RUNS = array('tagName' => 'I139', 'name' => "warmwater_runs", 'class' => 'number', 'type' => 'word');
-	
-	
+	// Warmwasser (0: aus, 1: läuft, 2: inaktiv)
+	const WARMWATER_RUNS = array('tagName' => 'I139', 'name' => "warmwater_runs", 'class' => 'number', 'type' => 'status');
 	
 	// Temperaturanpassung für die Heizung	
 	// value range 0..8 => -2K .. +2K
